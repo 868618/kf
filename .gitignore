@@ -1,0 +1,6 @@
+node_modules
+dist
+out
+*.log*
+*-lock.yaml
+.DS_Store
