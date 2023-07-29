@@ -1,9 +1,16 @@
 <template>
-  <el-row justify="end">
+  <!-- wifi -->
+  <el-row justify="end" style="padding: 5px">
     <el-col :span="1">
-      <el-button link @click="showWifiName">
+      <el-link :underline="false" @click="toCreatDocxPage">
+        <Icon :icon="fileTypeDocx" style="font-size: 25px" />
+      </el-link>
+    </el-col>
+
+    <el-col :span="1">
+      <el-link link @click="showWifiName">
         <Icon :icon="wifiFill" style="font-size: 25px" />
-      </el-button>
+      </el-link>
     </el-col>
   </el-row>
 
@@ -25,6 +32,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import wifiFill from '@iconify-icons/mingcute/wifi-fill'
+import fileTypeDocx from '@iconify-icons/tabler/file-type-docx'
 
 const holderEl = ref()
 const router = useRouter()
@@ -64,6 +72,12 @@ const handleClick = async () => {
 
 const showWifiName = () => {
   window.api.showWifiName()
+}
+
+const toCreatDocxPage = () => {
+  router.push({
+    path: '/createDocx/index'
+  })
 }
 </script>
 

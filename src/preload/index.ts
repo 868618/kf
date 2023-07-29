@@ -14,6 +14,14 @@ const api = {
     return ipcRenderer.invoke('showOpenDialogSync')
   },
 
+  async selectFile() {
+    const [file] = await ipcRenderer.invoke('showOpenDialogSync', { properties: ['openFile'] })
+
+    const res = await ipcRenderer.invoke('parseFile', file)
+
+    return res
+  },
+
   getWifiInfo() {
     return ipcRenderer.invoke('getWifiInfo')
   },

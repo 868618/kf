@@ -6,35 +6,48 @@ const findComponent = (path: string) => import(`@renderer/views/${path}/index.vu
 const routes = [
   {
     path: '/',
-    component: () => import('@renderer/views/index/index.vue')
-  },
-
-  {
-    path: '/wifi',
-    component: () => findComponent('wifi')
-  },
-
-  {
-    path: '/dashboard',
-    component: () => findComponent('dashboard')
-  },
-
-  {
-    path: '/pdfPreview',
-    component: () => findComponent('pdfPreview')
-  },
-
-  {
-    path: '/directory',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => findComponent('directory'),
-        alias: '/directory'
-      }
-    ]
+    component: () => findComponent('createDocx')
+    // component: () => import('@renderer/views/index/index.vue')
   }
+
+  // {
+  //   path: '/wifi',
+  //   component: () => findComponent('wifi')
+  // },
+
+  // {
+  //   path: '/dashboard',
+  //   component: () => findComponent('dashboard')
+  // },
+
+  // {
+  //   path: '/pdfPreview',
+  //   component: () => findComponent('pdfPreview')
+  // },
+
+  // {
+  //   path: '/directory',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => findComponent('directory'),
+  //       alias: '/directory'
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   path: '/createDocx',
+  //   component: () => findComponent('createDocx')
+  //   // component: Layout,
+  //   // children: [
+  //   //   {
+  //   //     path: 'index',
+  //   //     component: () => findComponent('createDocx')
+  //   //   }
+  //   // ]
+  // }
 ]
 
 const router = createRouter({

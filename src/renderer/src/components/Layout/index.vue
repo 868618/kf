@@ -24,6 +24,12 @@
             <el-icon><FolderOpened /></el-icon>
             <span>目录</span>
           </el-menu-item>
+
+          <el-menu-item index="/directory" class="menu-item">
+            <!-- <el-icon><FolderOpened /></el-icon> -->
+            <Icon :icon="fileTypeDocx" style="font-size: 20px; margin-right: 10px" />
+            <span>题库</span>
+          </el-menu-item>
         </el-menu>
       </div>
 
@@ -42,6 +48,8 @@
 
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
+import { Icon } from '@iconify/vue'
+import fileTypeDocx from '@iconify-icons/tabler/file-type-docx'
 import avatar from '@renderer/assets/imgs/icon.png'
 
 const route = useRoute()

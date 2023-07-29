@@ -7,6 +7,24 @@ declare global {
     electron: ElectronAPI
     api: {
       showOpenDialogSync: Electron.Dialog.showOpenDialogSync
+      selectFile: () => Promise<
+        {
+          name: string
+          type: string
+          answer: string
+          kind: string
+          explain: string
+          qzone: string
+          school: string
+          title: string
+          time1: string
+          time2: string
+          grade: string
+          class1: string
+          class2: string
+          option: string[]
+        }[]
+      >
       getWifiInfo: WiFiNetwork.getCurrentConnections
       mouseenter: () => void
       mouseleave: () => void

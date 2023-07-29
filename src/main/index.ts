@@ -1,16 +1,18 @@
 import path, { join, parse } from 'node:path'
+import fs from 'fs'
 
 import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
+
 import Store from 'electron-store'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 
 import wifi from 'node-wifi'
 import { globSync } from 'glob'
 import pdf2video from '@fatpigs/pdf2video'
-
 import icon from '../../resources/icon.png?asset'
 
-// import createHttpServer from './webserver'
+import lodash from 'lodash'
+import { XMLParser } from 'fast-xml-parser'
 
 type ICreateWindow = (
   options?: Electron.BrowserWindowConstructorOptions,
@@ -99,12 +101,36 @@ app.whenReady().then(async () => {
     })
   })
 
-  ipcMain.handle('showOpenDialogSync', () =>
+  ipcMain.handle('showOpenDialogSync', (event, args) =>
     dialog.showOpenDialogSync(mainWindow, {
       title: '选择目录',
-      properties: ['openDirectory']
+      properties: ['openDirectory'],
+      ...args
     })
   )
+
+  ipcMain.handle('parseFile', (event, file) => {
+    const parser = new XMLParser()
+    const XMLdata = fs.readFileSync(file, 'utf8')
+
+    const items = XMLdata.split('\r\n\r\n')
+      .map((item) => {
+        try {
+          return parser.parse(item)
+        } catch (error) {
+          return null
+        }
+      })
+      .filter(Boolean)
+      .map(({ question, name }) => {
+        return {
+          ...question,
+          name: Array.isArray(name) ? lodash.union(name).toString() : name
+        }
+      })
+
+    return items
+  })
 
   ipcMain.handle('getWifiInfo', () => {
     wifi.init({ iface: null })
